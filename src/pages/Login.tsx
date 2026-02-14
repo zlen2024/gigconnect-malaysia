@@ -72,7 +72,7 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm p-4 relative">
+    <div className="min-h-screen flex flex-col justify-center items-center bg-white/40 dark:bg-slate-900/90 backdrop-blur-sm p-4 relative">
       <div className="absolute top-4 right-4">
         <ThemeToggle />
       </div>

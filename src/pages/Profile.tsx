@@ -65,14 +65,14 @@ const Profile = () => {
 
   if (loading) {
     return (
-      <div className="flex h-screen items-center justify-center bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm">
+      <div className="flex h-screen items-center justify-center bg-white/40 dark:bg-slate-900/90 backdrop-blur-sm">
         <Loader2 className="h-8 w-8 animate-spin text-primary" />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm pb-20">
+    <div className="min-h-screen bg-white/40 dark:bg-slate-900/90 backdrop-blur-sm pb-20">
       <AppHeader
         title="Profile"
         action={
