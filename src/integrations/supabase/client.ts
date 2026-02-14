@@ -2,16 +2,46 @@
 import { createClient } from '@supabase/supabase-js';
 import type { Database } from './types';
 
-const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
-const SUPABASE_PUBLISHABLE_KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
+declare global {
+  interface Window {
+    env?: {
+      VITE_SUPABASE_URL?: string;
+      VITE_SUPABASE_PUBLISHABLE_KEY?: string;
+    };
+  }
+}
+
+// Safely access environment variables, handling cases where window.env or import.meta.env might be undefined
+const SUPABASE_URL =
+  (typeof window !== 'undefined' && window.env?.VITE_SUPABASE_URL) ||
+  import.meta.env.VITE_SUPABASE_URL ||
+  '';
+
+const SUPABASE_PUBLISHABLE_KEY =
+  (typeof window !== 'undefined' && window.env?.VITE_SUPABASE_PUBLISHABLE_KEY) ||
+  import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY ||
+  '';
 
 // Import the supabase client like this:
 // import { supabase } from "@/integrations/supabase/client";
 
-export const supabase = createClient<Database>(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
-  auth: {
-    storage: localStorage,
-    persistSession: true,
-    autoRefreshToken: true,
+// Ensure we don't crash if the environment variables are missing
+if (!SUPABASE_URL || !SUPABASE_PUBLISHABLE_KEY) {
+  console.warn(
+    'Supabase URL or Publishable Key is missing. Please check your environment variables.'
+  );
+}
+
+// Create a dummy client or a real one depending on configuration presence
+// This prevents the application from crashing on startup if keys are missing
+export const supabase = createClient<Database>(
+  SUPABASE_URL || 'https://placeholder.supabase.co',
+  SUPABASE_PUBLISHABLE_KEY || 'placeholder-key',
+  {
+    auth: {
+      storage: typeof localStorage !== 'undefined' ? localStorage : undefined,
+      persistSession: true,
+      autoRefreshToken: true,
+    }
   }
-});
+);
