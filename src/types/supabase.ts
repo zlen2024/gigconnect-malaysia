@@ -18,6 +18,8 @@ export type Database = {
           university: string | null
           bio: string | null
           skills: string[] | null
+          total_done_projects: number | null
+          total_earnings: number | null
           created_at: string
           updated_at: string
         }
@@ -29,6 +31,8 @@ export type Database = {
           university?: string | null
           bio?: string | null
           skills?: string[] | null
+          total_done_projects?: number | null
+          total_earnings?: number | null
           created_at?: string
           updated_at?: string
         }
@@ -40,6 +44,8 @@ export type Database = {
           university?: string | null
           bio?: string | null
           skills?: string[] | null
+          total_done_projects?: number | null
+          total_earnings?: number | null
           created_at?: string
           updated_at?: string
         }
