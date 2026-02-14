@@ -9,7 +9,7 @@ const stats = [
 
 export function StatsSection() {
   return (
-    <section className="gradient-primary py-16 px-4">
+    <section className="bg-gradient-to-br from-primary/80 to-primary-glow/80 backdrop-blur-sm py-16 px-4">
       <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
         {stats.map((stat, i) => (
           <motion.div

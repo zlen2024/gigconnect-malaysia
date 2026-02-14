@@ -66,7 +66,7 @@ export function FeaturesSection() {
               <div className={`mb-6 p-5 rounded-full shadow-lg ${
                 feature.highlight
                   ? "gradient-primary text-primary-foreground shadow-primary/30"
-                  : "bg-card shadow-border/50"
+                  : "bg-white/80 dark:bg-slate-800/80 shadow-border/50 backdrop-blur-sm"
               }`}>
                 <feature.icon className={`h-8 w-8 ${feature.highlight ? "" : "text-primary"}`} />
               </div>

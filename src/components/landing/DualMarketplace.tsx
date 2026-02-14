@@ -15,7 +15,7 @@ const clientFeatures = [
 
 export function DualMarketplace() {
   return (
-    <section id="how-it-works" className="px-4 py-20 bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm border-y border-border">
+    <section id="how-it-works" className="px-4 py-20 bg-white/40 dark:bg-slate-900/40 backdrop-blur-sm border-y border-border">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-14">
           <h2 className="text-3xl md:text-4xl font-extrabold mb-4">The Dual-Way Marketplace</h2>

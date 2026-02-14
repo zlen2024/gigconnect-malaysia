@@ -4,7 +4,7 @@ import { Rocket, Globe, AtSign, ExternalLink } from "lucide-react";
 
 export function Footer() {
   return (
-    <footer className="bg-background pt-20 pb-32 md:pb-20 px-4 border-t border-border">
+    <footer className="bg-white/40 dark:bg-slate-900/40 backdrop-blur-sm pt-20 pb-32 md:pb-20 px-4 border-t border-border">
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-10">
         <div className="max-w-md">
           <div className="flex items-center gap-2 mb-6">

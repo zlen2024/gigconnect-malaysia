@@ -10,7 +10,7 @@ const NotFound = () => {
   }, [location.pathname]);
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm relative">
+    <div className="flex min-h-screen items-center justify-center bg-white/40 dark:bg-slate-900/40 backdrop-blur-sm relative">
        <div className="absolute top-4 right-4">
         <ThemeToggle />
       </div>

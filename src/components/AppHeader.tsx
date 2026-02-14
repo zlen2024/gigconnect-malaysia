@@ -14,7 +14,7 @@ export function AppHeader({ title, showBack, action, className = "" }: AppHeader
   const navigate = useNavigate();
 
   return (
-    <header className={`sticky top-0 z-50 flex items-center justify-between bg-white/80 dark:bg-slate-900/80 backdrop-blur-md px-4 py-3 border-b border-slate-100 dark:border-slate-800 transition-colors ${className}`}>
+    <header className={`sticky top-0 z-50 flex items-center justify-between bg-white/40 dark:bg-slate-900/40 backdrop-blur-md px-4 py-3 border-b border-slate-100 dark:border-slate-800 transition-colors ${className}`}>
       <div className="flex items-center gap-3">
         {showBack ? (
           <Button

@@ -138,7 +138,7 @@ const JobDetail = () => {
   if (!job) return null;
 
   return (
-    <div className="container mx-auto max-w-2xl min-h-screen bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm shadow-xl p-0 pb-24">
+    <div className="container mx-auto max-w-2xl min-h-screen bg-white/40 dark:bg-slate-900/40 backdrop-blur-sm shadow-xl p-0 pb-24">
       <AppHeader title="Job Details" showBack />
 
       <div className="p-6 space-y-6">

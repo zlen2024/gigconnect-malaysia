@@ -64,7 +64,7 @@ const Requests = () => {
   return (
     <div className="font-display text-slate-900 dark:text-slate-100 antialiased min-h-screen">
       {/* Main Container */}
-      <div className="relative flex min-h-screen w-full max-w-md mx-auto flex-col bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm shadow-2xl overflow-x-hidden pb-20">
+      <div className="relative flex min-h-screen w-full max-w-md mx-auto flex-col bg-white/40 dark:bg-slate-900/40 backdrop-blur-sm shadow-2xl overflow-x-hidden pb-20">
         <AppHeader title="SiswaGig" />
 
         {/* Search & Map Preview Section */}

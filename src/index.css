@@ -122,7 +122,7 @@
 
 @layer utilities {
   .glass {
-    @apply bg-white/80 backdrop-blur-xl;
+    @apply bg-white/40 backdrop-blur-xl;
   }
   .dark .glass {
     @apply bg-black/40 backdrop-blur-xl;

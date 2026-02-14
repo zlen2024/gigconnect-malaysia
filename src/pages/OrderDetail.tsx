@@ -114,7 +114,7 @@ const OrderDetail = () => {
 
   if (loading || !order || !user) {
     return (
-      <div className="flex h-screen items-center justify-center bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm">
+      <div className="flex h-screen items-center justify-center bg-white/40 dark:bg-slate-900/40 backdrop-blur-sm">
         <Loader2 className="h-8 w-8 animate-spin text-primary" />
       </div>
     );
@@ -125,7 +125,7 @@ const OrderDetail = () => {
   const receiverId = isClient ? order.student_id : order.client_id;
 
   return (
-    <div className="min-h-screen bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm pb-20">
+    <div className="min-h-screen bg-white/40 dark:bg-slate-900/40 backdrop-blur-sm pb-20">
       <AppHeader title={`Order #${order.id.slice(0, 8)}`} showBack />
 
       <div className="container mx-auto p-4 md:p-8 max-w-4xl">
