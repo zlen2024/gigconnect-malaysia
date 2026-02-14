@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Loader2, ArrowLeft } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 import { Database } from "@/types/supabase";
+import { BottomNav } from "@/components/BottomNav";
 
 type JobWithProfile = Database['public']['Tables']['jobs']['Row'] & {
   profiles: {
@@ -179,6 +180,7 @@ const JobDetail = () => {
           </div>
         </div>
       </div>
+      <BottomNav />
     </div>
   );
 };

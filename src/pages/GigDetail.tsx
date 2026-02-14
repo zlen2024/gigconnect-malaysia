@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Loader2, ArrowLeft } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 import { Database } from "@/types/supabase";
+import { BottomNav } from "@/components/BottomNav";
 
 type GigWithProfile = Database['public']['Tables']['gigs']['Row'] & {
   profiles: {
@@ -168,6 +169,7 @@ const GigDetail = () => {
           </p>
         </div>
       </div>
+      <BottomNav />
     </div>
   );
 };

@@ -15,6 +15,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import StudentDashboard from "./pages/dashboard/StudentDashboard";
 import ClientDashboard from "./pages/dashboard/ClientDashboard";
 import OrderDetail from "./pages/OrderDetail";
+import Profile from "./pages/Profile";
 
 const queryClient = new QueryClient();
 
@@ -38,6 +39,7 @@ const App = () => (
             <Route path="/dashboard/student" element={<StudentDashboard />} />
             <Route path="/dashboard/client" element={<ClientDashboard />} />
             <Route path="/orders/:id" element={<OrderDetail />} />
+            <Route path="/profile" element={<Profile />} />
           </Route>
 
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

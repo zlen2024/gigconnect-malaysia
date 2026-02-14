@@ -7,6 +7,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { PostGigForm } from "@/components/dashboard/PostGigForm";
 import { Link } from "react-router-dom";
 import { Loader2, Plus } from "lucide-react";
+import { BottomNav } from "@/components/BottomNav";
 
 type Gig = Database['public']['Tables']['gigs']['Row'];
 type Order = Database['public']['Tables']['orders']['Row'];
@@ -59,7 +60,7 @@ const StudentDashboard = () => {
   }
 
   return (
-    <div className="container mx-auto p-6 space-y-8">
+    <div className="container mx-auto p-6 space-y-8 pb-24">
       <header className="flex justify-between items-center">
         <div>
           <h1 className="text-3xl font-bold tracking-tight">Student Dashboard</h1>
@@ -145,6 +146,7 @@ const StudentDashboard = () => {
           </Card>
         </TabsContent>
       </Tabs>
+      <BottomNav />
     </div>
   );
 };
