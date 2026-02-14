@@ -64,7 +64,7 @@ const Requests = () => {
   return (
     <div className="font-display text-slate-900 dark:text-slate-100 antialiased min-h-screen">
       {/* Main Container */}
-      <div className="relative flex min-h-screen w-full max-w-md mx-auto flex-col bg-white/40 dark:bg-slate-900/90 backdrop-blur-sm shadow-2xl overflow-x-hidden pb-20">
+      <div className="relative flex min-h-screen w-full container mx-auto flex-col bg-white/40 dark:bg-slate-900/90 backdrop-blur-sm shadow-2xl overflow-x-hidden pb-20 md:pb-0">
         <AppHeader title="SiswaGig" />
 
         {/* Search & Map Preview Section */}
@@ -111,12 +111,13 @@ const Requests = () => {
                   No jobs found matching your criteria.
                 </div>
             ) : (
-              filteredJobs.map((job) => (
-                <Link to={`/requests/${job.id}`} key={job.id}>
-                  <div className="bg-white dark:bg-slate-800 rounded-xl p-4 border border-slate-100 dark:border-slate-700 shadow-sm hover:shadow-md transition-shadow mb-4">
-                    <div className="flex justify-between items-start gap-4">
-                      <div className="space-y-1 flex-1">
-                        <div className="flex items-center gap-2 mb-1">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {filteredJobs.map((job) => (
+                  <Link to={`/requests/${job.id}`} key={job.id}>
+                    <div className="bg-white dark:bg-slate-800 rounded-xl p-4 border border-slate-100 dark:border-slate-700 shadow-sm hover:shadow-md transition-shadow h-full flex flex-col justify-between">
+                      <div className="flex justify-between items-start gap-4 mb-4">
+                        <div className="space-y-1 flex-1">
+                          <div className="flex items-center gap-2 mb-1">
                           <span className="text-primary text-lg font-bold tracking-tight">RM {job.budget}</span>
                         </div>
                         <h3 className="text-slate-900 dark:text-white font-bold text-base leading-snug">
@@ -145,14 +146,15 @@ const Requests = () => {
                             {job.profiles?.full_name?.charAt(0) || "C"}
                           </div>
                         )}
+                        </div>
                       </div>
+                      <Button className="w-full h-10 bg-primary hover:bg-primary/90 text-white rounded-lg text-sm font-bold transition-all mt-auto">
+                        Apply Now
+                      </Button>
                     </div>
-                    <Button className="mt-4 w-full h-10 bg-primary hover:bg-primary/90 text-white rounded-lg text-sm font-bold transition-all">
-                      Apply Now
-                    </Button>
-                  </div>
-                </Link>
-              ))
+                  </Link>
+                ))}
+              </div>
             )
           )}
         </main>
