@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { Home, Briefcase, List, Map, User } from "lucide-react";
+import { Home, Briefcase, List, Map, User, Folder } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export function BottomNav() {
@@ -15,6 +15,7 @@ export function BottomNav() {
     { label: "Home", icon: Home, route: "/" },
     { label: "Gigs", icon: Briefcase, route: "/gigs" },
     { label: "Requests", icon: List, route: "/requests" },
+    { label: "Projects", icon: Folder, route: "/projects" },
     { label: "Map", icon: Map, route: "/map" },
     { label: "Profile", icon: User, route: "/profile" },
   ];
