@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Rocket, Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -12,6 +13,21 @@ const navLinks = [
 
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [session, setSession] = useState<boolean>(false);
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(!!session);
+    });
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(!!session);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
 
   return (
     <nav className="sticky top-0 z-50 glass border-b border-primary/10 px-4 py-3">
@@ -37,12 +53,20 @@ export function Navbar() {
         </div>
 
         <div className="hidden md:flex items-center gap-3">
-          <Button variant="ghost" className="font-bold text-primary" asChild>
-            <Link to="/login">Login</Link>
-          </Button>
-          <Button className="font-bold shadow-primary-glow" asChild>
-            <Link to="/signup">Sign Up</Link>
-          </Button>
+          {session ? (
+            <Button className="font-bold shadow-primary-glow" asChild>
+              <Link to="/login">Dashboard</Link>
+            </Button>
+          ) : (
+            <>
+              <Button variant="ghost" className="font-bold text-primary" asChild>
+                <Link to="/login">Login</Link>
+              </Button>
+              <Button className="font-bold shadow-primary-glow" asChild>
+                <Link to="/signup">Sign Up</Link>
+              </Button>
+            </>
+          )}
         </div>
 
         {/* Mobile toggle */}
@@ -81,12 +105,20 @@ export function Navbar() {
                 </a>
               ))}
               <div className="flex gap-3 pt-2">
-                <Button variant="outline" className="flex-1 font-bold" asChild>
-                  <Link to="/login">Login</Link>
-                </Button>
-                <Button className="flex-1 font-bold" asChild>
-                  <Link to="/signup">Sign Up</Link>
-                </Button>
+                {session ? (
+                  <Button className="flex-1 font-bold shadow-primary-glow" asChild>
+                    <Link to="/login">Dashboard</Link>
+                  </Button>
+                ) : (
+                  <>
+                    <Button variant="outline" className="flex-1 font-bold" asChild>
+                      <Link to="/login">Login</Link>
+                    </Button>
+                    <Button className="flex-1 font-bold" asChild>
+                      <Link to="/signup">Sign Up</Link>
+                    </Button>
+                  </>
+                )}
               </div>
             </div>
           </motion.div>
