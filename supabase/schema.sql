@@ -6,7 +6,16 @@ create extension if not exists "uuid-ossp";
 create type user_role as enum ('student', 'client', 'admin');
 
 -- Create a type for order status
-create type order_status as enum ('pending', 'paid', 'in_progress', 'completed', 'cancelled');
+-- If the type already exists, we assume it has the basic values.
+-- We'll add 'submitted' if needed.
+do $$ begin
+    create type order_status as enum ('pending', 'paid', 'in_progress', 'submitted', 'completed', 'cancelled');
+exception
+    when duplicate_object then null;
+end $$;
+
+-- Add 'submitted' value if it doesn't exist (Postgres 9.1+)
+alter type order_status add value if not exists 'submitted';
 
 -- Create profiles table
 create table public.profiles (
@@ -17,6 +26,8 @@ create table public.profiles (
   university text,
   bio text,
   skills text[], -- Array of strings for skills
+  total_done_projects integer default 0,
+  total_earnings numeric default 0.00,
   created_at timestamptz default now(),
   updated_at timestamptz default now()
 );
@@ -117,6 +128,7 @@ create table public.orders (
   price numeric not null,
   status order_status default 'pending',
   receipt_url text, -- Proof of payment
+  submission_url text, -- Link to work result/file
   requirements text, -- Initial requirements from client
   created_at timestamptz default now(),
   updated_at timestamptz default now()
@@ -200,6 +212,43 @@ $$ language plpgsql security definer;
 create or replace trigger on_auth_user_created
   after insert on auth.users
   for each row execute procedure public.handle_new_user();
+
+-- Function to complete an order and update stats
+create or replace function public.complete_order(order_id uuid)
+returns void as $$
+declare
+  v_student_id uuid;
+  v_client_id uuid;
+  v_price numeric;
+  v_status order_status;
+begin
+  -- Get order details
+  select student_id, client_id, price, status into v_student_id, v_client_id, v_price, v_status
+  from public.orders
+  where id = order_id;
+
+  -- Security Check: Only the client can complete the order
+  if v_client_id != auth.uid() then
+    raise exception 'Not authorized to complete this order';
+  end if;
+
+  -- Logic Check: Can only complete if submitted (or valid prior state)
+  if v_status != 'submitted' then
+     raise exception 'Order must be submitted before completion';
+  end if;
+
+  -- Update order status
+  update public.orders
+  set status = 'completed'
+  where id = order_id;
+
+  -- Update student stats
+  update public.profiles
+  set total_done_projects = coalesce(total_done_projects, 0) + 1,
+      total_earnings = coalesce(total_earnings, 0) + v_price
+  where id = v_student_id;
+end;
+$$ language plpgsql security definer;
 
 -- Create storage buckets (need to be configured in Supabase dashboard, but documenting here)
 -- Buckets: 'avatars', 'gig-images', 'portfolio', 'receipts'

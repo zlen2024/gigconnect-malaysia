@@ -17,6 +17,7 @@ import StudentDashboard from "./pages/dashboard/StudentDashboard";
 import ClientDashboard from "./pages/dashboard/ClientDashboard";
 import OrderDetail from "./pages/OrderDetail";
 import Profile from "./pages/Profile";
+import Marketplace from "./pages/Marketplace";
 
 const queryClient = new QueryClient();
 
@@ -35,6 +36,7 @@ const App = () => (
           <Route path="/gigs/:id" element={<GigDetail />} />
           <Route path="/requests" element={<Requests />} />
           <Route path="/requests/:id" element={<JobDetail />} />
+          <Route path="/marketplace" element={<Marketplace />} />
 
           {/* Protected Routes */}
           <Route element={<ProtectedRoute />}>

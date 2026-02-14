@@ -18,6 +18,8 @@ export type Database = {
           university: string | null
           bio: string | null
           skills: string[] | null
+          total_done_projects: number
+          total_earnings: number
           created_at: string
           updated_at: string
         }
@@ -29,6 +31,8 @@ export type Database = {
           university?: string | null
           bio?: string | null
           skills?: string[] | null
+          total_done_projects?: number
+          total_earnings?: number
           created_at?: string
           updated_at?: string
         }
@@ -40,6 +44,8 @@ export type Database = {
           university?: string | null
           bio?: string | null
           skills?: string[] | null
+          total_done_projects?: number
+          total_earnings?: number
           created_at?: string
           updated_at?: string
         }
@@ -131,8 +137,9 @@ export type Database = {
           client_id: string
           student_id: string
           price: number
-          status: 'pending' | 'paid' | 'in_progress' | 'completed' | 'cancelled'
+          status: 'pending' | 'paid' | 'in_progress' | 'submitted' | 'completed' | 'cancelled'
           receipt_url: string | null
+          submission_url: string | null
           requirements: string | null
           created_at: string
           updated_at: string
@@ -144,8 +151,9 @@ export type Database = {
           client_id: string
           student_id: string
           price: number
-          status?: 'pending' | 'paid' | 'in_progress' | 'completed' | 'cancelled'
+          status?: 'pending' | 'paid' | 'in_progress' | 'submitted' | 'completed' | 'cancelled'
           receipt_url?: string | null
+          submission_url?: string | null
           requirements?: string | null
           created_at?: string
           updated_at?: string
@@ -157,8 +165,9 @@ export type Database = {
           client_id?: string
           student_id?: string
           price?: number
-          status?: 'pending' | 'paid' | 'in_progress' | 'completed' | 'cancelled'
+          status?: 'pending' | 'paid' | 'in_progress' | 'submitted' | 'completed' | 'cancelled'
           receipt_url?: string | null
+          submission_url?: string | null
           requirements?: string | null
           created_at?: string
           updated_at?: string
@@ -227,11 +236,16 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      complete_order: {
+        Args: {
+          order_id: string
+        }
+        Returns: void
+      }
     }
     Enums: {
       user_role: 'student' | 'client' | 'admin'
-      order_status: 'pending' | 'paid' | 'in_progress' | 'completed' | 'cancelled'
+      order_status: 'pending' | 'paid' | 'in_progress' | 'submitted' | 'completed' | 'cancelled'
     }
     CompositeTypes: {
       [_ in never]: never
