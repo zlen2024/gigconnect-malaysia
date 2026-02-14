@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
-import { Loader2, ArrowLeft } from "lucide-react";
+import { AppHeader } from "@/components/AppHeader";
+import { Loader2 } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 import { Database } from "@/types/supabase";
 import { BottomNav } from "@/components/BottomNav";
@@ -137,12 +138,10 @@ const JobDetail = () => {
   if (!job) return null;
 
   return (
-    <div className="container mx-auto max-w-2xl p-6 pb-24">
-      <Button variant="ghost" onClick={() => navigate(-1)} className="mb-4 pl-0 hover:bg-transparent hover:text-primary">
-        <ArrowLeft className="mr-2 h-4 w-4" /> Back
-      </Button>
+    <div className="container mx-auto max-w-2xl min-h-screen bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm shadow-xl p-0 pb-24">
+      <AppHeader title="Job Details" showBack />
 
-      <div className="space-y-6">
+      <div className="p-6 space-y-6">
         <div>
           <h1 className="text-3xl font-bold tracking-tight mb-2">{job.title}</h1>
           <div className="flex items-center gap-2 mb-4">

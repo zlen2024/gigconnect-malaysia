@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { BottomNav } from "@/components/BottomNav";
+import { AppHeader } from "@/components/AppHeader";
 import { supabase } from "@/integrations/supabase/client";
 import { Loader2 } from "lucide-react";
 
@@ -59,21 +60,10 @@ const Gigs = () => {
   });
 
   return (
-    <div className="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 antialiased min-h-screen">
+    <div className="text-slate-900 dark:text-slate-100 antialiased min-h-screen">
       {/* Main Container */}
-      <div className="relative flex min-h-screen w-full flex-col max-w-md mx-auto bg-white dark:bg-slate-900 shadow-xl overflow-hidden pb-20">
-        {/* Header */}
-        <header className="sticky top-0 z-40 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md px-4 py-4 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <Link to="/" className="bg-primary p-1.5 rounded-lg">
-              <span className="material-symbols-outlined text-white text-xl">work</span>
-            </Link>
-            <h1 className="text-xl font-bold tracking-tight text-primary">SiswaGig</h1>
-          </div>
-          <div className="flex items-center gap-3">
-             {/* Notification button mocked */}
-          </div>
-        </header>
+      <div className="relative flex min-h-screen w-full flex-col max-w-md mx-auto bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm shadow-xl overflow-hidden pb-20">
+        <AppHeader title="SiswaGig" />
 
         {/* Search Bar */}
         <div className="px-4 pt-4">

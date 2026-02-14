@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { BottomNav } from "@/components/BottomNav";
+import { AppHeader } from "@/components/AppHeader";
 import { supabase } from "@/integrations/supabase/client";
 import { Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -61,21 +62,10 @@ const Requests = () => {
   });
 
   return (
-    <div className="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased min-h-screen">
+    <div className="font-display text-slate-900 dark:text-slate-100 antialiased min-h-screen">
       {/* Main Container */}
-      <div className="relative flex min-h-screen w-full max-w-md mx-auto flex-col bg-white dark:bg-slate-900 shadow-2xl overflow-x-hidden pb-20">
-        {/* Header */}
-        <header className="sticky top-0 z-50 flex items-center bg-white/80 dark:bg-slate-900/80 backdrop-blur-md px-4 py-3 justify-between border-b border-slate-100 dark:border-slate-800">
-          <div className="flex items-center gap-3">
-            <Link to="/" className="size-10 rounded-full bg-primary/10 flex items-center justify-center overflow-hidden border border-primary/20">
-              <span className="material-symbols-outlined text-primary">rocket_launch</span>
-            </Link>
-            <h1 className="text-primary text-xl font-bold tracking-tight">SiswaGig</h1>
-          </div>
-          <div className="flex items-center gap-2">
-            {/* Notifications */}
-          </div>
-        </header>
+      <div className="relative flex min-h-screen w-full max-w-md mx-auto flex-col bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm shadow-2xl overflow-x-hidden pb-20">
+        <AppHeader title="SiswaGig" />
 
         {/* Search & Map Preview Section */}
         <div className="px-4 pt-5 pb-2 space-y-4">
