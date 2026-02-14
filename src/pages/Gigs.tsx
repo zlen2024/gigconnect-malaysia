@@ -62,7 +62,7 @@ const Gigs = () => {
   return (
     <div className="text-slate-900 dark:text-slate-100 antialiased min-h-screen">
       {/* Main Container */}
-      <div className="relative flex min-h-screen w-full flex-col max-w-md mx-auto bg-white/40 dark:bg-slate-900/90 backdrop-blur-sm shadow-xl overflow-hidden pb-20">
+      <div className="relative flex min-h-screen w-full flex-col container mx-auto bg-white/40 dark:bg-slate-900/90 backdrop-blur-sm shadow-xl overflow-hidden pb-20 md:pb-0">
         <AppHeader title="SiswaGig" />
 
         {/* Search Bar */}
@@ -107,7 +107,7 @@ const Gigs = () => {
                <Loader2 className="h-8 w-8 animate-spin text-primary" />
              </div>
           ) : (
-            <div className="grid grid-cols-1 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredGigs.length === 0 ? (
                 <div className="text-center text-muted-foreground py-12">
                   No gigs found matching your criteria.
