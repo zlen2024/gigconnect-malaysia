@@ -16,7 +16,7 @@ export function BottomNav() {
     { label: "Gigs", icon: "work", route: "/gigs" },
     { label: "Requests", icon: "list_alt", route: "/requests" },
     { label: "Map", icon: "map", route: "/map" },
-    { label: "Profile", icon: "person", route: "/profile" },
+    { label: "Dashboard", icon: "person", route: "/login" },
   ];
 
   return (
