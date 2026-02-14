@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { Rocket, Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -52,33 +53,37 @@ export function Navbar() {
           ))}
         </div>
 
-        <div className="hidden md:flex items-center gap-3">
-          {session ? (
-            <Button className="font-bold shadow-primary-glow" asChild>
-              <Link to="/login">Dashboard</Link>
-            </Button>
-          ) : (
-            <>
-              <Button variant="ghost" className="font-bold text-primary" asChild>
-                <Link to="/login">Login</Link>
-              </Button>
-              <Button className="font-bold shadow-primary-glow" asChild>
-                <Link to="/signup">Sign Up</Link>
-              </Button>
-            </>
-          )}
-        </div>
+        <div className="flex items-center gap-3">
+          <ThemeToggle />
 
-        {/* Mobile toggle */}
-        <button
-          className="md:hidden p-2 text-foreground"
-          onClick={() => setMobileOpen(!mobileOpen)}
-          aria-label="Toggle menu"
-          aria-expanded={mobileOpen}
-          aria-controls="mobile-menu"
-        >
-          {mobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-        </button>
+          <div className="hidden md:flex items-center gap-3">
+            {session ? (
+              <Button className="font-bold shadow-primary-glow" asChild>
+                <Link to="/login">Dashboard</Link>
+              </Button>
+            ) : (
+              <>
+                <Button variant="ghost" className="font-bold text-primary" asChild>
+                  <Link to="/login">Login</Link>
+                </Button>
+                <Button className="font-bold shadow-primary-glow" asChild>
+                  <Link to="/signup">Sign Up</Link>
+                </Button>
+              </>
+            )}
+          </div>
+
+          {/* Mobile toggle */}
+          <button
+            className="md:hidden p-2 text-foreground"
+            onClick={() => setMobileOpen(!mobileOpen)}
+            aria-label="Toggle menu"
+            aria-expanded={mobileOpen}
+            aria-controls="mobile-menu"
+          >
+            {mobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile menu */}

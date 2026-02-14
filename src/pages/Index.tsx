@@ -8,7 +8,7 @@ import { BottomNav } from "@/components/BottomNav";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-background pb-20 md:pb-0">
+    <div className="min-h-screen bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm pb-20 md:pb-0">
       <Navbar />
       <main>
         <HeroSection />

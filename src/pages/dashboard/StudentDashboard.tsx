@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { PostGigForm } from "@/components/dashboard/PostGigForm";
+import { AppHeader } from "@/components/AppHeader";
 import { Link } from "react-router-dom";
 import { Loader2, Plus } from "lucide-react";
 import { BottomNav } from "@/components/BottomNav";
@@ -60,16 +61,19 @@ const StudentDashboard = () => {
   }
 
   return (
-    <div className="container mx-auto p-6 space-y-8 pb-24">
-      <header className="flex justify-between items-center">
-        <div>
-          <h1 className="text-3xl font-bold tracking-tight">Student Dashboard</h1>
-          <p className="text-muted-foreground">Manage your gigs and orders</p>
-        </div>
-        <PostGigForm onSuccess={fetchData} />
-      </header>
+    <div className="container mx-auto min-h-screen bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm shadow-xl p-0 pb-24">
+      <AppHeader title="Dashboard" />
 
-      <Tabs defaultValue="gigs" className="w-full">
+      <div className="p-6 space-y-8">
+        <header className="flex justify-between items-center">
+          <div>
+            <h1 className="text-3xl font-bold tracking-tight">Student Dashboard</h1>
+            <p className="text-muted-foreground">Manage your gigs and orders</p>
+          </div>
+          <PostGigForm onSuccess={fetchData} />
+        </header>
+
+        <Tabs defaultValue="gigs" className="w-full">
         <TabsList>
           <TabsTrigger value="gigs">My Gigs</TabsTrigger>
           <TabsTrigger value="orders">Incoming Orders</TabsTrigger>
@@ -146,6 +150,7 @@ const StudentDashboard = () => {
           </Card>
         </TabsContent>
       </Tabs>
+      </div>
       <BottomNav />
     </div>
   );

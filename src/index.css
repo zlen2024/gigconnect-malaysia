@@ -54,6 +54,7 @@
 
     --gradient-primary: linear-gradient(135deg, hsl(214 100% 34%), hsl(214 100% 50%));
     --shadow-primary: 0 10px 40px -10px hsl(214 100% 34% / 0.3);
+    --bg-image: url('/bg-light.png');
   }
 
   .dark {
@@ -100,6 +101,7 @@
     --success-foreground: 0 0% 100%;
     --warning: 38 92% 50%;
     --warning-foreground: 0 0% 100%;
+    --bg-image: url('/bg-dark.png');
   }
 }
 
@@ -110,6 +112,11 @@
 
   body {
     @apply bg-background text-foreground font-sans antialiased;
+    background-image: var(--bg-image);
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
   }
 }
 

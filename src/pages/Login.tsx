@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/components/ui/use-toast";
 import { Rocket, Loader2 } from "lucide-react";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -71,7 +72,11 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center bg-background p-4">
+    <div className="min-h-screen flex flex-col justify-center items-center bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm p-4 relative">
+      <div className="absolute top-4 right-4">
+        <ThemeToggle />
+      </div>
+
       <Link to="/" className="flex items-center gap-2 mb-8">
         <div className="bg-primary p-2 rounded-lg">
           <Rocket className="h-6 w-6 text-primary-foreground" />

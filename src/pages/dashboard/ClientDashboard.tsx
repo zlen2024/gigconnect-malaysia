@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { PostJobForm } from "@/components/dashboard/PostJobForm";
+import { AppHeader } from "@/components/AppHeader";
 import { Link } from "react-router-dom";
 import { Loader2 } from "lucide-react";
 import { BottomNav } from "@/components/BottomNav";
@@ -60,16 +61,19 @@ const ClientDashboard = () => {
   }
 
   return (
-    <div className="container mx-auto p-6 space-y-8 pb-24">
-      <header className="flex justify-between items-center">
-        <div>
-          <h1 className="text-3xl font-bold tracking-tight">Client Dashboard</h1>
-          <p className="text-muted-foreground">Manage your job postings and active orders</p>
-        </div>
-        <PostJobForm onSuccess={fetchData} />
-      </header>
+    <div className="container mx-auto min-h-screen bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm shadow-xl p-0 pb-24">
+      <AppHeader title="Dashboard" />
 
-      <Tabs defaultValue="jobs" className="w-full">
+      <div className="p-6 space-y-8">
+        <header className="flex justify-between items-center">
+          <div>
+            <h1 className="text-3xl font-bold tracking-tight">Client Dashboard</h1>
+            <p className="text-muted-foreground">Manage your job postings and active orders</p>
+          </div>
+          <PostJobForm onSuccess={fetchData} />
+        </header>
+
+        <Tabs defaultValue="jobs" className="w-full">
         <TabsList>
           <TabsTrigger value="jobs">My Job Postings</TabsTrigger>
           <TabsTrigger value="orders">Active Orders</TabsTrigger>
@@ -132,6 +136,7 @@ const ClientDashboard = () => {
           </div>
         </TabsContent>
       </Tabs>
+      </div>
       <BottomNav />
     </div>
   );
