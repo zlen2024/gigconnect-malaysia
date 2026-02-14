@@ -3,6 +3,12 @@ import { useNavigate, useParams } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { useToast } from "@/hooks/use-toast";
 import { Loader2, Upload, CheckCircle, Clock, Lock, Star, MessageSquare } from "lucide-react";
 import { Database } from "@/integrations/supabase/types";
@@ -28,6 +34,7 @@ const OrderDetail = () => {
   const [rating, setRating] = useState(5);
   const [otherParty, setOtherParty] = useState<Profile | null>(null);
   const [submissionLink, setSubmissionLink] = useState("");
+  const [isReviewOpen, setIsReviewOpen] = useState(false);
 
   useEffect(() => {
     const fetchOrder = async () => {
@@ -164,6 +171,7 @@ const OrderDetail = () => {
             title: "Order Completed",
             description: "Payment released and project closed."
         });
+        setIsReviewOpen(true);
     }
     setActionLoading(false);
   };
@@ -262,7 +270,10 @@ const OrderDetail = () => {
                         <CheckCircle className="h-6 w-6" />
                     </div>
                     <div>
-                        <h3 className={`text-xl font-bold ${isAgreed ? "text-slate-900 dark:text-white" : "text-slate-400"}`}>Phase 1: Agreed</h3>
+                        <div className="flex justify-between items-center mb-1">
+                            <h3 className={`text-xl font-bold ${isAgreed ? "text-slate-900 dark:text-white" : "text-slate-400"}`}>Phase 1: Agreed</h3>
+                            {isAgreed && <span className="text-xs text-slate-400 font-medium ml-2">{new Date(order.created_at).toLocaleDateString()}</span>}
+                        </div>
                         <p className="text-slate-500 text-sm mb-4">Contract signed & budget escrowed.</p>
 
                         {order.status === 'pending' && isStudent && (
@@ -434,6 +445,33 @@ const OrderDetail = () => {
                 </div>
             </div>
         </div>
+
+        <Dialog open={isReviewOpen} onOpenChange={setIsReviewOpen}>
+            <DialogContent>
+                <DialogHeader>
+                    <DialogTitle>Rate Your Experience</DialogTitle>
+                </DialogHeader>
+                <div className="py-4">
+                    <p className="mb-3 text-sm font-semibold text-slate-800 dark:text-white">How was working with {otherParty?.full_name}?</p>
+                    <div className="flex gap-1 mb-4 justify-center">
+                        {[1, 2, 3, 4, 5].map((star) => (
+                            <button key={star} onClick={() => setRating(star)} type="button">
+                                <Star className={`h-8 w-8 ${star <= rating ? "text-amber-400 fill-amber-400" : "text-slate-300"}`} />
+                            </button>
+                        ))}
+                    </div>
+                    <Textarea
+                        className="mb-3"
+                        placeholder="Share your experience..."
+                        value={reviewText}
+                        onChange={(e) => setReviewText(e.target.value)}
+                    />
+                    <Button onClick={() => { handleSubmitReview(); setIsReviewOpen(false); }} disabled={actionLoading} className="w-full">
+                        Submit Review
+                    </Button>
+                </div>
+            </DialogContent>
+        </Dialog>
       </main>
       <BottomNav />
     </div>

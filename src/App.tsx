@@ -16,6 +16,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import StudentDashboard from "./pages/dashboard/StudentDashboard";
 import ClientDashboard from "./pages/dashboard/ClientDashboard";
 import OrderDetail from "./pages/OrderDetail";
+import MyProjects from "./pages/MyProjects";
 import Profile from "./pages/Profile";
 import Marketplace from "./pages/Marketplace";
 import { isSupabaseConfigured } from "./integrations/supabase/client";
@@ -59,6 +60,7 @@ const App = () => (
             <Route path="/dashboard/student" element={<StudentDashboard />} />
             <Route path="/dashboard/client" element={<ClientDashboard />} />
             <Route path="/orders/:id" element={<OrderDetail />} />
+            <Route path="/projects" element={<MyProjects />} />
             <Route path="/profile" element={<Profile />} />
           </Route>
 
