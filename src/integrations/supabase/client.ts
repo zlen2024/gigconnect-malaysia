@@ -32,6 +32,14 @@ if (!SUPABASE_URL || !SUPABASE_PUBLISHABLE_KEY) {
   );
 }
 
+// Export status for UI feedback
+export const isSupabaseConfigured = Boolean(
+  SUPABASE_URL &&
+  SUPABASE_PUBLISHABLE_KEY &&
+  SUPABASE_URL !== 'https://placeholder.supabase.co' &&
+  SUPABASE_PUBLISHABLE_KEY !== 'placeholder-key'
+);
+
 // Create a dummy client or a real one depending on configuration presence
 // This prevents the application from crashing on startup if keys are missing
 export const supabase = createClient<Database>(

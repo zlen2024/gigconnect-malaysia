@@ -17,6 +17,10 @@ import StudentDashboard from "./pages/dashboard/StudentDashboard";
 import ClientDashboard from "./pages/dashboard/ClientDashboard";
 import OrderDetail from "./pages/OrderDetail";
 import Profile from "./pages/Profile";
+import Marketplace from "./pages/Marketplace";
+import { isSupabaseConfigured } from "./integrations/supabase/client";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { AlertCircle } from "lucide-react";
 
 const queryClient = new QueryClient();
 
@@ -26,6 +30,19 @@ const App = () => (
       <TooltipProvider>
         <Toaster />
         <Sonner />
+        {!isSupabaseConfigured && (
+          <div className="fixed top-0 left-0 right-0 z-[100] p-4 bg-destructive/10 backdrop-blur-sm">
+            <div className="container max-w-4xl mx-auto">
+              <Alert variant="destructive">
+                <AlertCircle className="h-4 w-4" />
+                <AlertTitle>Configuration Error</AlertTitle>
+                <AlertDescription>
+                  Supabase is not configured properly. Please add your <code>VITE_SUPABASE_URL</code> and <code>VITE_SUPABASE_PUBLISHABLE_KEY</code> to the <code>.env</code> file.
+                </AlertDescription>
+              </Alert>
+            </div>
+          </div>
+        )}
         <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
@@ -35,6 +52,7 @@ const App = () => (
           <Route path="/gigs/:id" element={<GigDetail />} />
           <Route path="/requests" element={<Requests />} />
           <Route path="/requests/:id" element={<JobDetail />} />
+          <Route path="/marketplace" element={<Marketplace />} />
 
           {/* Protected Routes */}
           <Route element={<ProtectedRoute />}>
