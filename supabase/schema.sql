@@ -17,6 +17,8 @@ create table public.profiles (
   university text,
   bio text,
   skills text[], -- Array of strings for skills
+  total_done_projects integer default 0,
+  total_earnings numeric default 0,
   created_at timestamptz default now(),
   updated_at timestamptz default now()
 );
@@ -190,8 +192,8 @@ create policy "Users can create reviews for completed orders they were part of."
 create or replace function public.handle_new_user()
 returns trigger as $$
 begin
-  insert into public.profiles (id, full_name, avatar_url, role)
-  values (new.id, new.raw_user_meta_data->>'full_name', new.raw_user_meta_data->>'avatar_url', (new.raw_user_meta_data->>'role')::user_role);
+  insert into public.profiles (id, full_name, avatar_url, role, total_done_projects, total_earnings)
+  values (new.id, new.raw_user_meta_data->>'full_name', new.raw_user_meta_data->>'avatar_url', (new.raw_user_meta_data->>'role')::user_role, 0, 0);
   return new;
 end;
 $$ language plpgsql security definer;
