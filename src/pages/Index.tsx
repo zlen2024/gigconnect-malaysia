@@ -4,11 +4,10 @@ import { DualMarketplace } from "@/components/landing/DualMarketplace";
 import { FeaturesSection } from "@/components/landing/FeaturesSection";
 import { StatsSection } from "@/components/landing/StatsSection";
 import { Footer } from "@/components/landing/Footer";
-import { BottomNav } from "@/components/BottomNav";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm pb-20 md:pb-0">
+    <div className="min-h-screen bg-white/40 dark:bg-slate-900/90 backdrop-blur-sm pb-20 md:pb-0">
       <Navbar />
       <main>
         <HeroSection />
@@ -17,9 +16,6 @@ const Index = () => {
         <StatsSection />
       </main>
       <Footer />
-      <div className="md:hidden">
-        <BottomNav />
-      </div>
     </div>
   );
 };

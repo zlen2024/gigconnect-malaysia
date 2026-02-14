@@ -62,7 +62,7 @@ const Gigs = () => {
   return (
     <div className="text-slate-900 dark:text-slate-100 antialiased min-h-screen">
       {/* Main Container */}
-      <div className="relative flex min-h-screen w-full flex-col max-w-md mx-auto bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm shadow-xl overflow-hidden pb-20">
+      <div className="relative flex min-h-screen w-full flex-col max-w-md mx-auto bg-white/40 dark:bg-slate-900/90 backdrop-blur-sm shadow-xl overflow-hidden pb-20">
         <AppHeader title="SiswaGig" />
 
         {/* Search Bar */}
