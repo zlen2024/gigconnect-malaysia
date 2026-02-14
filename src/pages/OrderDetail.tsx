@@ -7,6 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { useToast } from "@/components/ui/use-toast";
 import { Loader2, Upload, CheckCircle, PlayCircle, ArrowLeft } from "lucide-react";
 import { Chat } from "@/components/Chat";
+import { BottomNav } from "@/components/BottomNav";
 
 type Order = Database['public']['Tables']['orders']['Row'];
 
@@ -202,6 +203,7 @@ const OrderDetail = () => {
             />
         </div>
       </div>
+      <BottomNav />
     </div>
   );
 };
