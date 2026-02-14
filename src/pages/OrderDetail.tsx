@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/dialog";
 import { useToast } from "@/hooks/use-toast";
 import { Loader2, Upload, CheckCircle, Clock, Lock, Star, MessageSquare } from "lucide-react";
-import { Database } from "@/integrations/supabase/types";
+import { Database } from "@/types/supabase";
 import { Chat } from "@/components/Chat";
 import { BottomNav } from "@/components/BottomNav";
 import { AppHeader } from "@/components/AppHeader";
