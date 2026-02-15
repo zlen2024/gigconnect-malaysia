@@ -37,3 +37,13 @@ END $$;
 CREATE POLICY "Users can create orders (as client or student)."
   ON public.orders FOR INSERT
   WITH CHECK ( auth.uid() = client_id OR auth.uid() = student_id );
+
+-- Fix: Add 'submitted' to order_status enum
+-- This command adds the missing value safely.
+ALTER TYPE "public"."order_status" ADD VALUE IF NOT EXISTS 'submitted';
+
+-- Optional: Ensure submission_url column exists in orders table (just in case)
+ALTER TABLE public.orders ADD COLUMN IF NOT EXISTS submission_url text;
+
+-- Reload the schema cache to apply changes immediately
+NOTIFY pgrst, 'reload schema';
