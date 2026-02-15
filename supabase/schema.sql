@@ -142,9 +142,9 @@ create policy "Users can view their own orders (as client or student)."
   on public.orders for select
   using ( auth.uid() = client_id or auth.uid() = student_id );
 
-create policy "Clients can create orders."
+create policy "Users can create orders (as client or student)."
   on public.orders for insert
-  with check ( auth.uid() = client_id );
+  with check ( auth.uid() = client_id or auth.uid() = student_id );
 
 create policy "Involved users can update order status/details."
   on public.orders for update
