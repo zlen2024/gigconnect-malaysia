@@ -15,6 +15,7 @@ import SignUp from "./pages/SignUp";
 import ProtectedRoute from "./components/ProtectedRoute";
 import StudentDashboard from "./pages/dashboard/StudentDashboard";
 import ClientDashboard from "./pages/dashboard/ClientDashboard";
+import DashboardRedirect from "./pages/DashboardRedirect";
 import OrderDetail from "./pages/OrderDetail";
 import MyProjects from "./pages/MyProjects";
 import Profile from "./pages/Profile";
@@ -57,6 +58,7 @@ const App = () => (
 
           {/* Protected Routes */}
           <Route element={<ProtectedRoute />}>
+            <Route path="/dashboard" element={<DashboardRedirect />} />
             <Route path="/dashboard/student" element={<StudentDashboard />} />
             <Route path="/dashboard/client" element={<ClientDashboard />} />
             <Route path="/orders/:id" element={<OrderDetail />} />

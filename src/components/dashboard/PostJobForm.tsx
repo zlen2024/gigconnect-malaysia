@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
 import { Loader2 } from "lucide-react";
+import { uploadFile } from "@/lib/upload";
 import {
   Dialog,
   DialogContent,
@@ -49,6 +50,7 @@ export function PostJobForm({ onSuccess }: PostJobFormProps) {
     location: "",
     deadline: "",
   });
+  const [imageFile, setImageFile] = useState<File | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -66,6 +68,21 @@ export function PostJobForm({ onSuccess }: PostJobFormProps) {
       return;
     }
 
+    let imageUrl = null;
+    if (imageFile) {
+      try {
+        imageUrl = await uploadFile(imageFile, "gig-images");
+      } catch (error) {
+        toast({
+          variant: "destructive",
+          title: "Error uploading image",
+          description: "Failed to upload image.",
+        });
+        setLoading(false);
+        return;
+      }
+    }
+
     const { error } = await supabase
       .from("jobs")
       .insert({
@@ -76,6 +93,7 @@ export function PostJobForm({ onSuccess }: PostJobFormProps) {
         budget: parseFloat(formData.budget),
         location: formData.location || "Remote",
         deadline: formData.deadline ? new Date(formData.deadline).toISOString() : null,
+        images: imageUrl ? [imageUrl] : null,
       });
 
     if (error) {
@@ -98,6 +116,7 @@ export function PostJobForm({ onSuccess }: PostJobFormProps) {
         location: "",
         deadline: "",
       });
+      setImageFile(null);
       if (onSuccess) onSuccess();
     }
     setLoading(false);
@@ -139,6 +158,16 @@ export function PostJobForm({ onSuccess }: PostJobFormProps) {
                 ))}
               </SelectContent>
             </Select>
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="image">Job Image (Optional)</Label>
+            <Input
+              id="image"
+              type="file"
+              accept="image/*"
+              onChange={(e) => setImageFile(e.target.files ? e.target.files[0] : null)}
+            />
           </div>
 
           <div className="grid grid-cols-2 gap-4">
