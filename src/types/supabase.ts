@@ -99,6 +99,7 @@ export type Database = {
           deadline: string | null
           category: string
           status: string | null
+          images: string[] | null
           created_at: string
           updated_at: string
         }
@@ -112,6 +113,7 @@ export type Database = {
           deadline?: string | null
           category: string
           status?: string | null
+          images?: string[] | null
           created_at?: string
           updated_at?: string
         }
@@ -125,6 +127,7 @@ export type Database = {
           deadline?: string | null
           category?: string
           status?: string | null
+          images?: string[] | null
           created_at?: string
           updated_at?: string
         }

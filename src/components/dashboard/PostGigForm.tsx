@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
 import { Loader2 } from "lucide-react";
+import { uploadFile } from "@/lib/upload";
 import {
   Dialog,
   DialogContent,
@@ -48,6 +49,7 @@ export function PostGigForm({ onSuccess }: PostGigFormProps) {
     price: "",
     delivery_time: "",
   });
+  const [imageFile, setImageFile] = useState<File | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -65,6 +67,21 @@ export function PostGigForm({ onSuccess }: PostGigFormProps) {
       return;
     }
 
+    let imageUrl = null;
+    if (imageFile) {
+      try {
+        imageUrl = await uploadFile(imageFile, "gig-images");
+      } catch (error) {
+        toast({
+          variant: "destructive",
+          title: "Error uploading image",
+          description: "Failed to upload image.",
+        });
+        setLoading(false);
+        return;
+      }
+    }
+
     const { error } = await supabase
       .from("gigs")
       .insert({
@@ -74,6 +91,7 @@ export function PostGigForm({ onSuccess }: PostGigFormProps) {
         category: formData.category,
         price: parseFloat(formData.price),
         delivery_time: parseInt(formData.delivery_time),
+        images: imageUrl ? [imageUrl] : null,
       });
 
     if (error) {
@@ -95,6 +113,7 @@ export function PostGigForm({ onSuccess }: PostGigFormProps) {
         price: "",
         delivery_time: "",
       });
+      setImageFile(null);
       if (onSuccess) onSuccess();
     }
     setLoading(false);
@@ -136,6 +155,16 @@ export function PostGigForm({ onSuccess }: PostGigFormProps) {
                 ))}
               </SelectContent>
             </Select>
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="image">Gig Image (Optional)</Label>
+            <Input
+              id="image"
+              type="file"
+              accept="image/*"
+              onChange={(e) => setImageFile(e.target.files ? e.target.files[0] : null)}
+            />
           </div>
 
           <div className="grid grid-cols-2 gap-4">
