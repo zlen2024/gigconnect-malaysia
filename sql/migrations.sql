@@ -15,3 +15,10 @@ create policy "Authenticated Upload"
 -- Add images column to jobs table to match gigs table structure
 alter table public.jobs
 add column if not exists images text[] default array[]::text[];
+
+-- Fix order creation policy for students applying to jobs
+drop policy if exists "Clients can create orders." on public.orders;
+
+create policy "Users can create orders (as client or student)."
+  on public.orders for insert
+  with check ( auth.uid() = client_id or auth.uid() = student_id );
