@@ -94,7 +94,7 @@ const Profile = () => {
             </Avatar>
             <div className="text-center space-y-1">
               <h2 className="text-xl font-bold text-slate-900 dark:text-white">{profile?.full_name || "User"}</h2>
-              <p className="text-sm text-slate-500 dark:text-slate-400">{profile?.role ? profile.role.charAt(0).toUpperCase() + profile.role.slice(1) : "User"}</p>
+              <p className="text-sm text-slate-500 dark:text-slate-400">{profile?.full_name ? "Member" : "User"}</p>
             </div>
           </CardContent>
         </Card>
@@ -105,7 +105,7 @@ const Profile = () => {
             variant="secondary"
             asChild
           >
-            <Link to={profile?.role === "student" ? "/dashboard/student" : "/dashboard/client"}>
+            <Link to="/dashboard/student">
               <LayoutDashboard className="mr-3 h-5 w-5 text-primary" />
               Dashboard
             </Link>

@@ -89,9 +89,10 @@ const GigDetail = () => {
         gig_id: gig.id,
         client_id: user.id,
         student_id: gig.user_id,
+        title: gig.title,
         price: gig.price,
         status: "pending",
-      });
+      } as any);
 
     if (error) {
        toast({
