@@ -12,42 +12,53 @@ export type Database = {
       profiles: {
         Row: {
           id: string
-          role: 'student' | 'client' | 'admin'
           full_name: string | null
           avatar_url: string | null
           university: string | null
           bio: string | null
           skills: string[] | null
-          total_done_projects: number | null
-          total_earnings: number | null
+          location: string | null
           created_at: string
           updated_at: string
         }
         Insert: {
           id: string
-          role?: 'student' | 'client' | 'admin'
           full_name?: string | null
           avatar_url?: string | null
           university?: string | null
           bio?: string | null
           skills?: string[] | null
-          total_done_projects?: number | null
-          total_earnings?: number | null
+          location?: string | null
           created_at?: string
           updated_at?: string
         }
         Update: {
           id?: string
-          role?: 'student' | 'client' | 'admin'
           full_name?: string | null
           avatar_url?: string | null
           university?: string | null
           bio?: string | null
           skills?: string[] | null
-          total_done_projects?: number | null
-          total_earnings?: number | null
+          location?: string | null
           created_at?: string
           updated_at?: string
+        }
+      }
+      user_roles: {
+        Row: {
+          id: string
+          user_id: string
+          role: 'student' | 'client'
+        }
+        Insert: {
+          id?: string
+          user_id: string
+          role: 'student' | 'client'
+        }
+        Update: {
+          id?: string
+          user_id?: string
+          role?: 'student' | 'client'
         }
       }
       gigs: {
@@ -59,7 +70,9 @@ export type Database = {
           category: string
           price: number
           delivery_time: number
+          location: string | null
           images: string[] | null
+          is_active: boolean
           created_at: string
           updated_at: string
         }
@@ -71,7 +84,9 @@ export type Database = {
           category: string
           price: number
           delivery_time: number
+          location?: string | null
           images?: string[] | null
+          is_active?: boolean
           created_at?: string
           updated_at?: string
         }
@@ -83,7 +98,9 @@ export type Database = {
           category?: string
           price?: number
           delivery_time?: number
+          location?: string | null
           images?: string[] | null
+          is_active?: boolean
           created_at?: string
           updated_at?: string
         }
@@ -98,7 +115,7 @@ export type Database = {
           location: string | null
           deadline: string | null
           category: string
-          status: string | null
+          status: string
           created_at: string
           updated_at: string
         }
@@ -111,7 +128,7 @@ export type Database = {
           location?: string | null
           deadline?: string | null
           category: string
-          status?: string | null
+          status?: string
           created_at?: string
           updated_at?: string
         }
@@ -124,7 +141,7 @@ export type Database = {
           location?: string | null
           deadline?: string | null
           category?: string
-          status?: string | null
+          status?: string
           created_at?: string
           updated_at?: string
         }
@@ -136,10 +153,13 @@ export type Database = {
           job_id: string | null
           client_id: string
           student_id: string
+          title: string
           price: number
-          status: 'pending' | 'paid' | 'in_progress' | 'completed' | 'cancelled'
-          receipt_url: string | null
+          status: 'pending' | 'agreed' | 'in_progress' | 'submitted' | 'completed' | 'cancelled'
           requirements: string | null
+          deliverable_url: string | null
+          progress: number
+          receipt_url: string | null
           created_at: string
           updated_at: string
         }
@@ -149,10 +169,13 @@ export type Database = {
           job_id?: string | null
           client_id: string
           student_id: string
+          title: string
           price: number
-          status?: 'pending' | 'paid' | 'in_progress' | 'completed' | 'cancelled'
-          receipt_url?: string | null
+          status?: 'pending' | 'agreed' | 'in_progress' | 'submitted' | 'completed' | 'cancelled'
           requirements?: string | null
+          deliverable_url?: string | null
+          progress?: number
+          receipt_url?: string | null
           created_at?: string
           updated_at?: string
         }
@@ -162,10 +185,13 @@ export type Database = {
           job_id?: string | null
           client_id?: string
           student_id?: string
+          title?: string
           price?: number
-          status?: 'pending' | 'paid' | 'in_progress' | 'completed' | 'cancelled'
-          receipt_url?: string | null
+          status?: 'pending' | 'agreed' | 'in_progress' | 'submitted' | 'completed' | 'cancelled'
           requirements?: string | null
+          deliverable_url?: string | null
+          progress?: number
+          receipt_url?: string | null
           created_at?: string
           updated_at?: string
         }
@@ -177,7 +203,7 @@ export type Database = {
           sender_id: string
           receiver_id: string
           content: string
-          is_read: boolean | null
+          is_read: boolean
           created_at: string
         }
         Insert: {
@@ -186,7 +212,7 @@ export type Database = {
           sender_id: string
           receiver_id: string
           content: string
-          is_read?: boolean | null
+          is_read?: boolean
           created_at?: string
         }
         Update: {
@@ -195,7 +221,7 @@ export type Database = {
           sender_id?: string
           receiver_id?: string
           content?: string
-          is_read?: boolean | null
+          is_read?: boolean
           created_at?: string
         }
       }
@@ -233,11 +259,18 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: { _user_id: string; _role: 'student' | 'client' }
+        Returns: boolean
+      }
+      get_user_role: {
+        Args: { _user_id: string }
+        Returns: 'student' | 'client'
+      }
     }
     Enums: {
-      user_role: 'student' | 'client' | 'admin'
-      order_status: 'pending' | 'paid' | 'in_progress' | 'completed' | 'cancelled'
+      app_role: 'student' | 'client'
+      order_status: 'pending' | 'agreed' | 'in_progress' | 'submitted' | 'completed' | 'cancelled'
     }
     CompositeTypes: {
       [_ in never]: never

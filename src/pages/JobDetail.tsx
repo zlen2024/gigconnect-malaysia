@@ -107,9 +107,10 @@ const JobDetail = () => {
         job_id: job.id,
         client_id: job.user_id,
         student_id: user.id,
+        title: job.title,
         price: job.budget,
         status: "pending",
-      });
+      } as any);
 
     if (error) {
        toast({

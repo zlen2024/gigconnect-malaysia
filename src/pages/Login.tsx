@@ -15,21 +15,25 @@ const Login = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
 
+  const redirectByRole = async (userId: string) => {
+    const { data: roleData } = await supabase
+      .from("user_roles" as any)
+      .select("role")
+      .eq("user_id", userId)
+      .maybeSingle();
+
+    if ((roleData as any)?.role === "student") {
+      navigate("/dashboard/student");
+    } else {
+      navigate("/dashboard/client");
+    }
+  };
+
   useEffect(() => {
     const checkSession = async () => {
       const { data: { session } } = await supabase.auth.getSession();
       if (session) {
-        const { data: profile } = await supabase
-          .from("profiles")
-          .select("role")
-          .eq("id", session.user.id)
-          .single();
-
-        if (profile?.role === "student") {
-          navigate("/dashboard/student");
-        } else {
-          navigate("/dashboard/client");
-        }
+        await redirectByRole(session.user.id);
       }
     };
     checkSession();
@@ -54,20 +58,9 @@ const Login = () => {
       return;
     }
 
-    // Check user role to redirect appropriately
     const { data: { session } } = await supabase.auth.getSession();
     if (session) {
-      const { data: profile } = await supabase
-        .from("profiles")
-        .select("role")
-        .eq("id", session.user.id)
-        .single();
-
-      if (profile?.role === "student") {
-        navigate("/dashboard/student");
-      } else {
-        navigate("/dashboard/client");
-      }
+      await redirectByRole(session.user.id);
     }
   };
 
