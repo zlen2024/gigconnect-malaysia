@@ -15,3 +15,7 @@ create policy "Authenticated Upload"
 -- Add images column to jobs table to match gigs table structure
 alter table public.jobs
 add column if not exists images text[] default array[]::text[];
+
+-- Add submission_url column to orders table
+alter table public.orders
+add column if not exists submission_url text;
